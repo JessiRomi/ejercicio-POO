@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio </title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <1> Ejercicio de POO</1>
+    <p> Ejercicio de POO</p>
     <form>
         <label for="apellido">Apellido</label>
         <input type="text" name="apellido" id="apellido">
@@ -16,7 +17,7 @@
         <input type="number" name="dni" id="dni">
         <label for="fecha_nacimiento">Fecha de Nacimiento</label> 
         <input type="date"name="fecha_nacimiento" id="fecha_nacimiento">
-        <select name="Estado_civil" id="Estado_civil">
+        <select name="estado_civil" id="estado_civil">
             <option value=""selected hidden>Estado Civil</option>
             <option value="soltero"> Soltero/a </option>
             <option value="casado">Casado/a </option>
@@ -28,11 +29,12 @@
         <input type="number" name="sueldo" id="sueldo">
         <select name="puesto_trabajo" id="puesto_trabajo">
             <option value=""selected hidden>Elija su puesto de trabajo</option>
-            <option value=""> </option>
-            <option value=""></option>
-            <option value=""></option>  
+            <option value="obrero">Obrero</option>
+            <option value="rrhh">RRHH</option>
+            <option value="jefe_seccion">Jefe de sección</option>
+            <option value="director_ejecutivo">Director Ejecutivo</option>  
         </select>
-        
+        <button id="crear"> crear </button>
        
 
     </form>
