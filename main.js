@@ -28,8 +28,28 @@ class Persona {
     get fecha_nacimiento(){
         return this.#fecha_nacimiento;
     }
+    
+    get estado_civil(){
+        return this.#estado_civil;
+    } 
+
     set estado_civil(nuevo_estado_civil){
         this.#estado_civil = nuevo_estado_civil
+    }
+
+    obtenerEdad (){
+        let hoy = new Date(Date.now());
+        let fec_nac = new Date(Date.parse(this.#fecha_nacimiento));
+        let edad = hoy.getFullYear() - fec_nac.getFullYear(); // getfullyear es una función de la clase date, que devuelve el año. 
+        if(hoy.getMonth() < fec_nac.getMonth()){
+            edad = edad - 1     
+        }
+        else if(hoy.getMonth() === fec_nac.getMonth()){
+            if(hoy.getDate() < fec_nac.getDate()){
+                edad = edad - 1;
+            }
+        }
+        return edad;
     }
 }
 /*...................FIN DE LA CLASE PERSONA.....................................*/ 
@@ -38,9 +58,13 @@ class Empleado extends Persona{
     #fecha_de_alta;
     #sueldo_base;
     #puesto_de_trabajo;
-    constructor(persona,fecha_de_alta,sueldo_base,puesto_de_trabajo){ // en el constructor se agrega el nombre de la clase persona para ser llamada.
-        super(persona.apellido,persona.nombre,persona.dni,persona.fecha_nacimiento,persona.estado_civil) 
+    #numero_legajo;
+    static #id = 0;
+    constructor(apellido,nombre, dni, fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo,numero_legajo){ // en el constructor se agrega el nombre de la clase persona para ser llamada.
+       Empleado.#id++;
+        super(apellido,nombre,dni,fecha_nacimiento,estado_civil) 
         //con el super () se llama al contructor de la clase padre
+        this.#numero_legajo = numero_legajo;
         this.#fecha_de_alta = fecha_de_alta;
         if(sueldo_base>0){
             this.#sueldo_base = sueldo_base;
@@ -50,6 +74,7 @@ class Empleado extends Persona{
             this.sueldo_base = 1
         }
         this.#puesto_de_trabajo = puesto_de_trabajo;
+        this.#numero_legajo = Empleado.#id;
     }
 
     set sueldo_base(nuevo_sueldo){
@@ -76,8 +101,22 @@ class Empleado extends Persona{
         }
 
     }
+    get fecha_de_alta(){
+        return this.#fecha_de_alta;
+    }
 
 }
 /*.................FIN DE LA CLASE EMPLEADO.............................*/ 
 /*..........................COMIENZO DE LA CLASE JEFATURA................*/
 
+class Jefatura extends Empleado {
+constructor(apellido,nombre,dni,fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo){
+super(apellido,nombre,dni,fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo)
+}
+
+}
+
+
+let laPersona = new Persona("Aravena","Gastón","44705734","10/28/2003","soltero");
+
+console.log(laPersona.obtenerEdad())
