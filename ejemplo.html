@@ -10,9 +10,9 @@
     <p> Ejercicio de POO</p>
     <form>
         <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" id="apellido">
+        <input type="text" name="apellido" id="apellido" autocomplete="off">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" id="nombre">
+        <input type="text" name="nombre" id="nombre" autocomplete="off">
         <label for="dni">DNI</label>
         <input type="number" name="dni" id="dni">
         <label for="fecha_nacimiento">Fecha de Nacimiento</label> 
@@ -31,6 +31,7 @@
             <option value=""selected hidden>Elija su puesto de trabajo</option>
             <option value="obrero">Obrero</option>
             <option value="rrhh">RRHH</option>
+            <option value="jefe_rrhh">Jefe de RRHH</option>
             <option value="jefe_seccion">Jefe de sección</option>
             <option value="director_ejecutivo">Director Ejecutivo</option>  
         </select>
@@ -38,6 +39,9 @@
        
 
     </form>
+
+
+    <button id="mostrar">Mostrar Empleados</button>
     <script src="./main.js"></script>
 </body>
 </html>

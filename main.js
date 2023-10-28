@@ -60,11 +60,10 @@ class Empleado extends Persona{
     #puesto_de_trabajo;
     #numero_legajo;
     static #id = 0;
-    constructor(apellido,nombre, dni, fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo,numero_legajo){ // en el constructor se agrega el nombre de la clase persona para ser llamada.
+    constructor(apellido,nombre, dni, fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo){ // en el constructor se agrega el nombre de la clase persona para ser llamada.
        Empleado.#id++;
         super(apellido,nombre,dni,fecha_nacimiento,estado_civil) 
         //con el super () se llama al contructor de la clase padre
-        this.#numero_legajo = numero_legajo;
         this.#fecha_de_alta = fecha_de_alta;
         if(sueldo_base>0){
             this.#sueldo_base = sueldo_base;
@@ -104,6 +103,15 @@ class Empleado extends Persona{
     get fecha_de_alta(){
         return this.#fecha_de_alta;
     }
+    get sueldo_base(){
+        return this.#sueldo_base;
+    }
+    get puesto_de_trabajo(){
+        return this.#puesto_de_trabajo;
+    }
+    get numero_legajo(){
+        return this.#numero_legajo;
+    }
 
 }
 /*.................FIN DE LA CLASE EMPLEADO.............................*/ 
@@ -113,10 +121,69 @@ class Jefatura extends Empleado {
 constructor(apellido,nombre,dni,fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo){
 super(apellido,nombre,dni,fecha_nacimiento,estado_civil,fecha_de_alta,sueldo_base,puesto_de_trabajo)
 }
+nueva_tarea (nueva_tarea,empleado){
+    console.log(`El ${this.puesto_de_trabajo} ha decidido delegar la tarea de ${nueva_tarea} a ${empleado.apellido} ${empleado.nombre}`)
+}
 
+}
+var empleados= [
+    new Empleado ("Aravena","Gastón","44705734","03/30/2003","soltero","10/20/2022",100000,"obrero"),
+    new Empleado ("Conejero", "Romina","31359234","02/13/1985","soltera","04/20/2017",150000,"obrero"),
+    new Jefatura ("Millahual","Victor","34243678","03/18/1989","divorciado","03/15/2019",250000,"jefe de RRHH")
+]
+
+function crear(){
+    let apellido = document.getElementById("apellido");
+    let nombre = document.getElementById("nombre");
+    let dni = document.getElementById("dni");
+    let fecha_nacimiento = document.getElementById("fecha_nacimiento");
+    let estado_civil = document.getElementById("estado_civil");
+    let fecha_de_alta = document.getElementById("fecha_alta");
+    let sueldo_base = document.getElementById("sueldo");
+    let puesto_de_trabajo = document.getElementById("puesto_trabajo");
+    if(apellido.value != "" && nombre.value != "" && dni.value != "" && fecha_nacimiento !="" && estado_civil.value != "" && fecha_de_alta.value != "" && sueldo_base.value != "" && puesto_de_trabajo.value != ""){
+        let miPersona = new Persona (apellido.value,nombre.value,dni.value,fecha_nacimiento.value,estado_civil.value)
+        if(puesto_de_trabajo.value.includes("jefe")){
+            empleados.push(new Jefatura(apellido.value,nombre.value,dni.value,fecha_nacimiento.value,estado_civil.value,fecha_de_alta.value,sueldo_base.value,puesto_de_trabajo.value));
+        }
+        else{
+            empleados.push(new Empleado(apellido.value,nombre.value,dni.value,fecha_nacimiento.value,estado_civil.value,fecha_de_alta.value,sueldo_base.value,puesto_de_trabajo.value));
+        }
+        alert("Empleado Agregado");
+        apellido.value ="";
+        nombre.value ="";
+        dni.value = "";
+        fecha_nacimiento.value= "";
+        estado_civil.value = "";
+        fecha_de_alta.value ="";
+        sueldo_base.value ="";
+        puesto_de_trabajo.value="";
+    }
+
+    else{
+        alert("No deben quedar campos vacios, completar");
+    }
 }
 
 
-let laPersona = new Persona("Aravena","Gastón","44705734","10/28/2003","soltero");
+function mostrarEmpleados(){
+    empleados.forEach(
+        empleado => {
+            console.log(empleado)
+        }
+        )
+    }
+    
+    
+    var btn_crear = document.getElementById("crear");
+    
+    btn_crear.addEventListener("click", (e)=>{
+        e.preventDefault();
+        crear();
+    })
 
-console.log(laPersona.obtenerEdad())
+    var btn_mostrar = document.getElementById("mostrar");
+    
+    btn_mostrar.addEventListener("click", ()=>{
+        mostrarEmpleados();
+    })
